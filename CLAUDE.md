@@ -4,14 +4,38 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**writing-skill** is a multi-platform content creation system for Claude Code. It provides modular Skills for end-to-end Chinese content creation - from research and image sourcing to writing, humanizing (removing AI traces), and platform-specific formatting for Zhihu, Xiaohongshu, and WeChat.
+**writing-skill** is a multi-platform content creation plugin for Claude Code. It provides modular Skills for end-to-end Chinese content creation - from research and image sourcing to writing, humanizing (removing AI traces), and platform-specific formatting for Zhihu, Xiaohongshu, and WeChat.
 
-The system is built around:
+The plugin is built around:
 
-- **Agent orchestration** via `content-creator` agent
-- **8 Skills** for specialized tasks (research, image search/processing, writing, humanizing, platform conversion)
+- **Plugin structure** with `.claude-plugin/plugin.json` manifest
+- **9 Skills** for specialized tasks (research, image search/processing, writing, humanizing, platform conversion)
 - **Python scripts** under each skill's `scripts/` directory for executable functionality
 - **Platform-native output** that avoids AI detection patterns
+
+## Plugin Structure
+
+This project follows the official Claude Code plugin structure:
+
+```
+oh-my-writing-skill/
+├── .claude-plugin/         # Plugin manifest directory
+│   └── plugin.json         # Plugin metadata and configuration
+├── skills/                 # Skills directory (root level)
+│   ├── content-creator/
+│   ├── deep-research/
+│   ├── general-writing/
+│   ├── humanizer-cn/
+│   ├── image-processing/
+│   ├── image-search/
+│   ├── wechat-converter/
+│   ├── xiaohongshu-converter/
+│   └── zhihu-converter/
+├── requirements.txt        # Python dependencies
+├── pyproject.toml          # Python project configuration
+├── CLAUDE.md               # Plugin documentation (this file)
+└── README.md               # Project readme
+```
 
 ## Environment Setup
 
@@ -38,23 +62,23 @@ Skills can be invoked via the `/skill` command (e.g., `/deep-research`) or their
 **Deep Research**
 
 ```bash
-python .claude/skills/deep-research/scripts/research.py "选题" --max_results 20 --timelimit m --region zh-cn --output research.md
+python skills/deep-research/scripts/research.py "选题" --max_results 20 --timelimit m --region zh-cn --output research.md
 ```
 
 **Image Search**
 
 ```bash
-python .claude/skills/image-search/scripts/image_search.py "关键词" --max_results 5 --size Large --download output/images
+python skills/image-search/scripts/image_search.py "关键词" --max_results 5 --size Large --download output/images
 ```
 
 **Image Processing (add captions)**
 
 ```bash
 # Frame mode (caption below image)
-python .claude/skills/image-processing/scripts/image_processor.py input.jpg output.jpg --mode frame --text "配文"
+python skills/image-processing/scripts/image_processor.py input.jpg output.jpg --mode frame --text "配文"
 
 # Sticker mode (caption overlay)
-python .claude/skills/image-processing/scripts/image_processor.py input.jpg output.jpg --mode sticker --text "重点" --position bottom-right
+python skills/image-processing/scripts/image_processor.py input.jpg output.jpg --mode sticker --text "重点" --position bottom-right
 ```
 
 ## Architecture
@@ -154,7 +178,7 @@ output/{日期}_{选题}/
 
 ### Adding a New Skill
 
-1. Create directory under `.claude/skills/skill-name/`
+1. Create directory under `skills/skill-name/`
 2. Add `SKILL.md` with proper frontmatter
 3. Add `scripts/script_name.py` if executable functionality is needed
 4. Register in `content-creator.md` agent's skills list if orchestration is needed
@@ -164,15 +188,15 @@ output/{日期}_{选题}/
 
 Platform-specific rules are in each converter's `SKILL.md`:
 
-- `.claude/skills/zhihu-converter/SKILL.md`
-- `.claude/skills/xiaohongshu-converter/SKILL.md`
-- `.claude/skills/wechat-converter/SKILL.md`
+- `skills/zhihu-converter/SKILL.md`
+- `skills/xiaohongshu-converter/SKILL.md`
+- `skills/wechat-converter/SKILL.md`
 
 These contain style guides, before/after examples, and transformation rules.
 
 ### AI Writing Pattern Detection
 
-The `humanizer-cn` skill identifies 22+ AI-generated patterns specific to Chinese text. Patterns are documented in `.claude/skills/humanizer-cn/SKILL.md`.
+The `humanizer-cn` skill identifies 22+ AI-generated patterns specific to Chinese text. Patterns are documented in `skills/humanizer-cn/SKILL.md`.
 
 ## Quick Reference for Common Tasks
 

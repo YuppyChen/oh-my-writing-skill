@@ -39,7 +39,7 @@ metadata:
 使用 [深度研究 Skill](../deep-research/SKILL.md) 收集背景资料：
 
 ```bash
-python .claude/skills/deep-research/scripts/research.py "选题关键词" --max_results 20 --output research.md
+python skills/deep-research/scripts/research.py "选题关键词" --max_results 20 --output research.md
 ```
 
 #### 1.2 图片搜索
@@ -47,7 +47,7 @@ python .claude/skills/deep-research/scripts/research.py "选题关键词" --max_
 使用 [图片搜索 Skill](../image-search/SKILL.md) 查找配图：
 
 ```bash
-python .claude/skills/image-search/scripts/image_search.py "配图关键词" --size Large --download ./images
+python skills/image-search/scripts/image_search.py "配图关键词" --size Large --download ./images
 ```
 
 #### 1.3 图片处理（可选）
@@ -55,7 +55,7 @@ python .claude/skills/image-search/scripts/image_search.py "配图关键词" --s
 使用 [图片处理 Skill](../image-processing/SKILL.md) 添加配文：
 
 ```bash
-python .claude/skills/image-processing/scripts/image_processor.py input.jpg output.jpg --mode frame --text "配文"
+python skills/image-processing/scripts/image_processor.py input.jpg output.jpg --mode frame --text "配文"
 ```
 
 ### 阶段 2：内容创作
