@@ -48,7 +48,7 @@ allowed-tools:
 当没有可用的联网搜索工具时，使用 deep-research Skill 的 Python 脚本：
 
 ```bash
-python .claude/skills/deep-research/scripts/research.py "{选题}" \
+python skills/deep-research/scripts/research.py "{选题}" \
   --max_results 15 \
   --timelimit m \
   --region zh-cn \
@@ -62,7 +62,7 @@ python .claude/skills/deep-research/scripts/research.py "{选题}" \
 使用 image-search Skill 的脚本搜索配图：
 
 ```bash
-python .claude/skills/image-search/scripts/image_search.py "{配图关键词}" \
+python skills/image-search/scripts/image_search.py "{配图关键词}" \
   --max_results 5 \
   --size Large \
   --download output/images
@@ -71,7 +71,7 @@ python .claude/skills/image-search/scripts/image_search.py "{配图关键词}" \
 如需添加配文，使用 image-processing Skill：
 
 ```bash
-python .claude/skills/image-processing/scripts/image_processor.py \
+python skills/image-processing/scripts/image_processor.py \
   output/images/image_001.jpg \
   output/images/image_001_captioned.jpg \
   --mode frame \

@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  基于 Claude Agent Skills 构建的智能内容创作助手，支持用户需求澄清、深度研究、配图、AI 痕迹优化、多平台风格等功能，一键生成高质量文章。
+  基于 Claude Code Plugin 构建的智能内容创作助手，支持用户需求澄清、深度研究、配图、AI 痕迹优化、多平台风格等功能，一键生成高质量文章。
 </p>
 
 ## 功能特性
@@ -21,7 +21,9 @@
 ## 项目结构
 
 ```
-.claude/
+oh-my-writing-skill/
+├── .claude-plugin/
+│   └── plugin.json                 # Plugin 清单文件
 └── skills/
     ├── content-creator/            # 主协调器（Skill，用户手动调用）
     ├── deep-research/              # 网络搜索（后台 Skill）
@@ -61,6 +63,7 @@ pip install -r requirements.txt
 
 说明：
 
+- 本项目采用 Claude Code Plugin 标准结构，包含 `.claude-plugin/plugin.json` 清单文件
 - `content-creator` 是主入口 Skill，需要手动调用（`disable-model-invocation: true`）
 - 8 个子 Skills（deep-research、image-search 等）是后台能力，不会出现在菜单（`user-invocable: false`）
 - Claude 会在 content-creator 内部自动协调这些子 Skills

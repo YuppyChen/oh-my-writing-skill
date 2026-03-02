@@ -1,0 +1,19 @@
+{
+  "name": "oh-my-writing-skill",
+  "description": "Multi-platform content creation system for Chinese content - from research and image sourcing to writing, humanizing, and platform-specific formatting for Zhihu, Xiaohongshu, and WeChat.",
+  "version": "1.0.0",
+  "author": {
+    "name": "writing-skill"
+  },
+  "keywords": [
+    "chinese",
+    "content-creation",
+    "writing",
+    "research",
+    "zhihu",
+    "xiaohongshu",
+    "wechat",
+    "image-processing",
+    "humanizer"
+  ]
+}
